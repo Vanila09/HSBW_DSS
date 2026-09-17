@@ -1,1 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7·8차시 통합 · 지역 문제 해결 프로젝트</title>
+<style>
+:root{
+  --teal-900:#0B3D3B; --teal-700:#0E7C7B; --teal-500:#189A93;
+  --teal-100:#E7F4F2; --teal-050:#F5FAF9;
+  --coral:#E85A4F; --coral-100:#FCE7E4;
+  --amber:#E8A93F; --amber-100:#FCF1DE;
+  --purple:#6B46C1; --purple-100:#F3E8FF;
+  --ink:#1B2B2A; --ink-soft:#4B5D5B; --paper:#FFFFFF; --line:#DCEAE8;
+  --gemini:#4285F4; --padlet-c:#FF5B54; --yt:#FF0000;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
 
+/* Navigation */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.topnav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:14px;color:var(--teal-900);}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);}
+.navlinks{display:flex;gap:4px;overflow-x:auto;}
+.navlinks a{font-size:12px;font-weight:700;color:var(--ink-soft);padding:6px 12px;border-radius:20px;white-space:nowrap;}
+.navlinks a:hover{background:var(--teal-100);color:var(--teal-900);}
+.navlinks a.highlight{background:var(--teal-900);color:#fff;}
+.navlinks a.download-nav{background:var(--coral);color:#fff;}
+
+/* Hero Header */
+.hero{background:radial-gradient(1200px 500px at 85% -10%, rgba(24,154,147,.16), transparent 60%),linear-gradient(180deg,#FFFFFF 0%, var(--teal-050) 100%);padding:52px 0 40px;border-bottom:1px solid var(--line);}
+.badge-row{display:flex;gap:8px;margin-bottom:16px;}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;}
+.badge.b-teal{background:var(--teal-900);color:#fff;}
+.badge.b-coral{background:var(--coral-100);color:var(--coral);}
+.hero h1{font-size:clamp(24px,3.2vw,34px);line-height:1.3;margin:0 0 12px;font-weight:800;color:var(--teal-900);}
+.hero .topic{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--teal-500);border-radius:10px;padding:14px 18px;font-size:14.5px;color:var(--teal-900);font-weight:600;}
+
+/* Section Basics */
+section{padding:50px 0;}
+section.alt{background:var(--teal-050);}
+.lesson-divider{background:var(--teal-900);color:#fff;padding:22px 0;}
+.sec-head{margin-bottom:22px;}
+.sec-tag{display:inline-block;font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:8px;}
+.sec-tag.t7{background:#E0F2FE;color:#0369A1;}
+.sec-tag.t8{background:var(--amber-100);color:#B7791F;}
+.title-with-btn{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:6px;}
+.title-with-btn h2{font-size:clamp(19px,2.2vw,24px);margin:0;color:var(--teal-900);font-weight:800;}
+
+/* 3대 동기부여 섹션 카드 */
+.warmup-box-list{display:flex;flex-direction:column;gap:24px;margin-top:14px;}
+.warmup-step-card{background:#fff;border:2px solid #E2E8F0;border-radius:16px;padding:22px;box-shadow:0 6px 16px -6px rgba(0,0,0,0.06);}
+.warmup-step-card.c1{border-color:#FED7D7;background:linear-gradient(135deg, #FFFDFD 0%, #FFF5F5 100%);}
+.warmup-step-card.c2{border-color:#BAE6FD;background:linear-gradient(135deg, #FDFFFF 0%, #F0F9FF 100%);}
+.warmup-step-card.c3{border-color:#E9D8FD;background:linear-gradient(135deg, #FFFEFF 0%, #FAF5FF 100%);}
+
+.step-title-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;}
+.step-title-row h3{margin:0;font-size:16px;color:var(--teal-900);display:flex;align-items:center;gap:8px;}
+
+/* 영상 링크 버튼 */
+.btn-video{display:inline-flex;align-items:center;gap:6px;background:var(--yt);color:#fff;font-size:12px;font-weight:800;padding:6px 12px;border-radius:20px;box-shadow:0 3px 8px rgba(255,0,0,0.25);transition:all .15s;}
+.btn-video:hover{transform:translateY(-1px);background:#CC0000;}
+
+/* 페르소나 카드 그리드 */
+.persona-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:14px;}
+.persona-card{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:14px;}
+.persona-head{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13.5px;color:var(--teal-900);margin-bottom:8px;}
+.persona-bubble{background:var(--teal-050);border-radius:8px;padding:10px;font-size:12.2px;color:var(--ink-soft);line-height:1.5;}
+
+/* 밸런스 퀴즈 */
+.quiz-opts{display:flex;gap:10px;margin-top:10px;}
+.quiz-btn{flex:1;background:#fff;border:1.5px solid #D6BCFA;padding:10px 14px;border-radius:8px;font-size:12.8px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.quiz-btn:hover{background:#F3E8FF;}
+.quiz-btn.active{background:#805AD5;color:#fff;border-color:#805AD5;}
+
+/* Worksheets & Tables */
+.worksheet{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+.ws-row{border-bottom:1px solid var(--line);padding:18px 22px;}
+.ws-row:last-child{border-bottom:none;}
+.ws-row h4{margin:0 0 6px;font-size:14.2px;color:var(--teal-900);}
+.ws-row textarea{width:100%;min-height:54px;border:1px solid var(--line);border-radius:10px;padding:10px;font-family:inherit;font-size:13px;resize:vertical;background:var(--teal-050);}
+.ws-row textarea:focus{outline:2px solid var(--teal-500);background:#fff;}
+
+.sol-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;}
+.sol-box{background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:16px;}
+.sol-box h4{margin:0 0 8px;font-size:13.5px;color:var(--teal-900);}
+.sol-box textarea{width:100%;min-height:60px;border:1px solid var(--line);border-radius:8px;padding:9px;font-family:inherit;font-size:12.8px;background:var(--teal-050);}
+
+.dtable{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.dtable th{background:var(--teal-700);color:#fff;font-size:12.5px;font-weight:700;padding:12px 16px;text-align:left;}
+.dtable td{padding:8px 12px;border-bottom:1px solid var(--line);background:var(--teal-050);}
+.dtable td input{width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12.8px;background:#fff;}
+.dtable td input.team-input{font-weight:800;color:var(--teal-900);text-align:center;}
+
+/* Action Buttons */
+.act-link-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:20px;color:#fff;}
+.act-link-btn.gemini{background:var(--gemini);}
+.act-link-btn.padlet{background:var(--padlet-c);}
+.download-card{background:#FFF5F5;border:2px solid #FED7D7;border-radius:18px;padding:24px;margin-top:20px;}
+.step-flex-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px;}
+.step-card{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;}
+.btn-export{background:var(--coral);color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;}
+
+/* Print */
+#printable-area{display:none;}
+@media print {
+  body * {visibility: hidden;}
+  #printable-area, #printable-area * {visibility: visible;}
+  #printable-area {display: block !important; position: absolute; left: 0; top: 0; width: 100%; padding: 12px; background: #fff;}
+  .print-page {border: 2px solid #222; padding: 14px;}
+  .print-table {width: 100%; border-collapse: collapse; margin-bottom: 6px;}
+  .print-table th, .print-table td {border: 1px solid #444; padding: 3px 6px; font-size: 10px;}
+  .print-block {border: 1px solid #777; border-radius: 4px; padding: 5px; margin-bottom: 5px; font-size: 10.5px;}
+  .print-title {font-weight: bold; font-size: 11px; margin-bottom: 2px;}
+}
+@media(max-width:820px){.persona-grid, .sol-grid, .step-flex-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>7·8차시 연계 · 지역 문제 해결 프로젝트</div>
+    <div class="navlinks">
+      <a href="#warmup-section">🔥 3대 동기부여 활동</a>
+      <a href="#p7-problem">7차시: 문제 정의</a>
+      <a href="#p7-ideas">해결 아이디어</a>
+      <a href="#p7-plan">방안 정리</a>
+      <a href="#p8-section" class="highlight">8차시: 발표 평가</a>
+      <a href="#final-submit" class="download-nav">📤 최종 등록</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="badge-row">
+      <span class="badge b-teal">STAGE 03 · 완성:창작</span>
+      <span class="badge b-coral">7·8차시 통합 프로젝트</span>
+    </div>
+    <h1>데이터 기반 우리 지역 문제 해결 프로젝트</h1>
+    <div class="topic"><b>프로젝트 미션</b> &nbsp;동기부여 영상과 주민 목소리를 바탕으로 <b>우리 지역의 문제</b>를 정의하고, <b>창의적인 해결 솔루션</b>을 설계하여 8차시 패들렛에 최종 발표합니다.</div>
+  </div>
+</header>
+
+<!-- ================= [도입부: 3대 동기부여 활동 전체 탑재] ================= -->
+<section id="warmup-section" style="background:#F0FDF4; border-bottom:1px solid #BBF7D0;">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag" style="background:#DCFCE7; color:#15803D;">수업 오프닝 3대 탐구 챌린지</span>
+      <h2>🚨 "우리가 발굴한 데이터는 왜 심각한 위기일까?"</h2>
+      <p>단순한 숫자가 아닙니다. 우리 동네 골목에서 실제로 일어나고 있는 현장을 3단계로 확인해 보세요.</p>
+    </div>
+
+    <div class="warmup-box-list">
+      <!-- 1. 가상 속보 및 실제 르포 영상 -->
+      <div class="warmup-step-card c1">
+        <div class="step-title-row">
+          <h3><span>🚨 활동 1.</span> 가상 긴급 속보 : "공실률 35% 돌파, 셔터 닫힌 골목"</h3>
+          <a href="https://www.youtube.com/results?search_query=%EC%A7%80%EB%B0%A9+%EC%83%81%EA%B4%8C+%EA%B3%B5%EC%8B%A4%EB%A5%A0+%EB%A5%B4%ED%8F%AC" target="_blank" rel="noopener noreferrer" class="btn-video">
+            <span>▶ 르포 현장 영상 보기</span> <span>↗</span>
+          </a>
+        </div>
+        <p style="margin:0; font-size:13px; color:#742A2A; line-height:1.5;">
+          <b>"사람이 줄어드니 가게가 닫히고, 일자리가 사라지니 청년들이 떠납니다."</b><br>
+          지난 시간 우리가 엑셀과 통계포털에서 확인했던 인구 및 사업체 감소 곡선은 단순한 통계가 아니라, 실제 우리 주변 골목의 생생한 위기 신호였습니다.
+        </p>
+      </div>
+
+      <!-- 2. AI 페르소나 주민 인터뷰 -->
+      <div class="warmup-step-card c2">
+        <div class="step-title-row">
+          <h3><span>🗣️ 활동 2.</span> AI 페르소나 인터뷰 : "데이터 너머, 주민들의 진짜 목소리"</h3>
+          <span style="font-size:12px; font-weight:800; color:#0369A1;">💡 7차시 문제 정의의 핵심 단서</span>
+        </div>
+        <div class="persona-grid">
+          <div class="persona-card">
+            <div class="persona-head"><span>🧑</span> 취준생 민우 (24세)</div>
+            <div class="persona-bubble">"동네에 갈 만한 스터디 카페도, 취업할 일자리도 없어서 매일 1시간씩 옆 도시로 나가요."</div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-head"><span>👵</span> 분식집 김 사장님 (58세)</div>
+            <div class="persona-bubble">"학생들이 줄어드니까 점심 장사가 완전히 끊겼어요. 3년째 임대료도 겨우 버티고 있습니다."</div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-head"><span>👨‍👩‍👧</span> 학부모 수진 씨 (36세)</div>
+            <div class="persona-bubble">"아이랑 주말에 갈 만한 문화 공간이나 키즈 카페가 없어서 신도시 쇼핑몰로만 가게 돼요."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 골목 역전 성공 사례 밸런스 퀴즈 & 10억 시장 미션 -->
+      <div class="warmup-step-card c3">
+        <div class="step-title-row">
+          <h3><span>💡 활동 3.</span> 역전의 성공 사례 퀴즈 : "비어있던 거리를 되살린 신의 한 수는?"</h3>
+          <a href="https://www.youtube.com/results?search_query=%EB%A1%9C%EC%BB%AC+%ED%81%AC%EB%A6%AC%EC%97%90%EC%9D%B4%ED%84%B0+%EA%B3%A8%EB%AA%A9+%EC%83%81%EA%B4%8C+%EC%82%B4%EB%A6%AC%EA%B8%B0" target="_blank" rel="noopener noreferrer" class="btn-video">
+            <span>▶ 골목 재생 성공 사례 영상</span> <span>↗</span>
+          </a>
+        </div>
+        <p style="margin:0 0 10px; font-size:12.8px; color:#553C9A;">
+          낡은 조선소 거리나 폐방앗간 골목을 수십만 명이 줄 서는 핫플레이스로 바꾼 비밀은 무엇이었을까요?
+        </p>
+        <div class="quiz-opts">
+          <button class="quiz-btn" onclick="checkWarmQuiz(this, '❌ 상가나 아파트만 더 짓는다고 사람이 오지 않습니다. 콘텐츠와 사람이 먼저 채워져야 합니다!')">A. 빈 상가를 모두 헐고 아파트 단지 짓기</button>
+          <button class="quiz-btn" onclick="checkWarmQuiz(this, '🎯 정답! 텅 빈 공간을 청년 창업가들에게 무상 임대하고 감성 문화거리로 탈바꿈시켜 수십만 명의 청년을 불러모았습니다!')">B. 청년 창업가 팝업스토어 &amp; 문화공간 조성</button>
+        </div>
+        <div id="quiz-result-msg" style="margin-top:10px; font-size:12.5px; font-weight:800; color:#44337A; display:none;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= [7차시 영역: 교재 7~8p] ================= -->
+<section id="p7-problem">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag t7">7차시 활동 1 (교재 7p)</span>
+      <h2>지역 문제 정의하기</h2>
+      <p>동기부여 영상과 주민들의 목소리를 바탕으로 우리 지역의 문제를 한 문장으로 명확히 정의해 봅시다.</p>
+    </div>
+
+    <div class="worksheet">
+      <div class="ws-row">
+        <h4>1️⃣ 우리 지역의 문제를 한 문장으로 정의해 봐요.</h4>
+        <textarea id="in-p7-prob-sentence" placeholder="예: OO구는 2018년 이후 청년 인구와 골목 사업체 수가 동시에 감소하여 지역 상권이 급격히 쇠퇴하고 있다."></textarea>
+      </div>
+      <div class="ws-row">
+        <h4>2️⃣ 이 문제로 가장 영향을 받는 사람은 누구일까요?</h4>
+        <textarea id="in-p7-target" placeholder="예: 골목 소상공인, 취업을 원하는 청년층, 주변 문화시설이 부족해진 지역 주민 등"></textarea>
+      </div>
+      <div class="ws-row">
+        <h4>3️⃣ 이 문제가 왜 생겼을 것 같나요? (데이터만으로 알 수 없지만, 우리가 생각하는 이유)</h4>
+        <textarea id="in-p7-reason" placeholder="예: 인근 신도시 개발로 대형 인프라가 이동했고, 청년들이 선호하는 문화·창업 인프라가 부족했기 때문인 것으로 추정됨."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="p7-ideas" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag t7">7차시 활동 2 (교재 8p)</span>
+      <div class="title-with-btn">
+        <h2>해결 아이디어 브레인스토밍 (거창하지 않아도 돼요!)</h2>
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="act-link-btn gemini">
+          <span>💡 Gemini에 아이디어 추천</span> <span>↗</span>
+        </a>
+      </div>
+      <p>성공 사례 영상처럼 우리 동네 골목을 살릴 수 있는 구체적인 아이디어를 자유롭게 적어보세요.</p>
+    </div>
+
+    <div class="worksheet">
+      <div class="ws-row" style="background:#FFFDF7;">
+        <h4 style="color:#92400E;">📌 7차시에서 정의한 지역 문제 (기준점)</h4>
+        <textarea id="in-p8-base-prob" placeholder="문제 정의 문장이 여기에 자동 표시됩니다."></textarea>
+      </div>
+      <div class="ws-row">
+        <h4>💡 아이디어 1</h4>
+        <textarea id="in-p8-idea1" placeholder="예: 빈 점포를 1년간 무상 지원하는 '청년 로컬 크리에이터 팝업스토어 존' 운영"></textarea>
+      </div>
+      <div class="ws-row">
+        <h4>💡 아이디어 2</h4>
+        <textarea id="in-p8-idea2" placeholder="예: 전통시장과 연계한 주말 야시장 및 청년 예술가 거리 버스킹 축제"></textarea>
+      </div>
+      <div class="ws-row">
+        <h4>💡 아이디어 3</h4>
+        <textarea id="in-p8-idea3" placeholder="예: 동네 특산물을 활용한 시그니처 베이커리 개발 및 숏폼 챌린지 홍보"></textarea>
+      </div>
+      <div class="ws-row">
+        <h4>💡 아이디어 4 (선택)</h4>
+        <textarea id="in-p8-idea4" placeholder="예: 어르신들의 레시피와 청년의 감각을 결합한 세대 융합 로컬 식당 운영"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="p7-plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag t7">7차시 활동 3 (교재 8p)</span>
+      <h2>최종 해결 방안 정리 (8차시 발표 준비)</h2>
+      <p>위 아이디어 중 가장 좋은 1가지를 골라 4단계 발표 구조에 맞춰 정리하세요.</p>
+    </div>
+
+    <div class="sol-grid">
+      <div class="sol-box">
+        <h4>1️⃣ 우리 지역의 문제</h4>
+        <textarea id="in-fin-prob" placeholder="예: 청년 유출로 인한 중심 상권 공실률 급증"></textarea>
+      </div>
+      <div class="sol-box">
+        <h4>2️⃣ 데이터 근거</h4>
+        <textarea id="in-fin-data" placeholder="예: 5년간 인구 12% 감소 및 소상공인 사업체 1,150개 동시 폐업"></textarea>
+      </div>
+      <div class="sol-box">
+        <h4>3️⃣ 해결 아이디어</h4>
+        <textarea id="in-fin-sol" placeholder="예: 유휴 공간을 개조한 '청년 로컬 크리에이터 창업 허브' 조성"></textarea>
+      </div>
+      <div class="sol-box">
+        <h4>4️⃣ 기대 효과</h4>
+        <textarea id="in-fin-effect" placeholder="예: 청년 유동인구 일 400명 유입 및 주변 점포 매출 15% 반등 기대"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= [8차시 영역: 교재 9p] ================= -->
+<div id="p8-section" class="lesson-divider">
+  <div class="wrap">
+    <div>
+      <span class="badge" style="background:#fff; color:var(--teal-900); font-weight:800; margin-bottom:4px;">STAGE 03 · 8차시</span>
+      <h2 style="margin:0; font-size:21px; font-weight:800;">최종 모둠 발표 및 상호 평가</h2>
+    </div>
+    <p style="margin:0; font-size:13.5px; opacity:0.9;">7차시에서 기획한 솔루션을 모둠별로 발표하고, 동료 발표를 경청하며 메모를 완성합니다.</p>
+  </div>
+</div>
+
+<section id="p8-memo" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag t8">8차시 핵심 활동 (교재 9p)</span>
+      <div class="title-with-btn">
+        <h2>다른 모둠 발표 청취 메모 (총 7개 모둠 평가)</h2>
+        <a href="https://padlet.com/1819hyuk/padlet-s0237vr7taoksqvu3p5o" target="_blank" rel="noopener noreferrer" class="act-link-btn padlet">
+          <span>📌 패들렛 발표판 열기</span> <span>↗</span>
+        </a>
+      </div>
+      <p>각 모둠의 발표를 들으며 <b>모둠명</b>, <b>잘한 점 1가지</b>, <b>궁금한 점 1가지</b>를 빠짐없이 기록하세요.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="dtable">
+        <tr>
+          <th style="width:16%;">모둠</th>
+          <th style="width:42%;">잘한 점 1가지</th>
+          <th style="width:42%;">궁금한 점 1가지</th>
+        </tr>
+        <tr>
+          <td><input id="in-team-name-1" class="team-input" value="1모둠" placeholder="모둠명 입력"></td>
+          <td><input id="in-p-good1" placeholder="예: 데이터 근거가 구체적이었음"></td>
+          <td><input id="in-p-q1" placeholder="예: 초기 창업 지원금 확보 방안은?"></td>
+        </tr>
+        <tr>
+          <td><input id="in-team-name-2" class="team-input" value="2모둠" placeholder="모둠명 입력"></td>
+          <td><input id="in-p-good2" placeholder="예: 문제를 한 문장으로 깔끔하게 요약함"></td>
+          <td><input id="in-p-q2" placeholder="예: 어르신 일자리와의 구체적 연결법은?"></td>
+        </tr>
+        <tr>
+          <td><input id="in-team-name-3" class="team-input" value="3모둠" placeholder="모둠명 입력"></td>
+          <td><input id="in-p-good3" placeholder="예: 야시장 버스킹 축제 아이디어가 실현 가능해 보임"></td>
+          <td><input id="in-p-q3" placeholder="예: 겨울철 운영 대책은 무엇인가요?"></td>
+        </tr>
+        <tr>
+          <td><input id="in-team-name-4" class="team-input" value="4모둠" placeholder="모둠명 입력"></td>
+          <td><input id="in-p-good4" placeholder="예: 전환점 연도를 정확히 짚어냄"></td>
+          <td><input id="in-p-q4" placeholder="예: 신도시로 간 인구를 유인할 핵심 포인트는?"></td>
+        </tr>
+        <tr>
+          <td><input id="in-team-name-5" class="team-input" value="5모둠" placeholder="모둠명 입력"></td>
+          <td><input id="in-p-good5" placeholder="예: 기대 효과 수치화가 설득력 있었음"></td>
+          <td><input id="in-p-q5" placeholder="예: 홍보 채널 타깃 연령대는 어떻게 되나요?"></td>
+        </tr>
+        <!-- 추가된 6모둠 -->
+        <tr>
+          <td><input id="in-team-name-6" class="team-input" value="6모둠" placeholder="모둠명 입력"></td>
+          <td><input id="in-p-good6" placeholder="예: 로컬 특산물을 연계한 창의적 아이디어"></td>
+          <td><input id="in-p-q6" placeholder="예: 주변 상권과의 협력 계획은 어떻게 되나요?"></td>
+        </tr>
+        <!-- 추가된 7모둠 -->
+        <tr>
+          <td><input id="in-team-name-7" class="team-input" value="7모둠" placeholder="모둠명 입력"></td>
+          <td><input id="in-p-good7" placeholder="예: 발표 전달력과 시각 자료 구성이 우수했음"></td>
+          <td><input id="in-p-q7" placeholder="예: 예상되는 가장 큰 장애 요소는 무엇인가요?"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= [최종 리포트 PDF 저장 및 패들렛 제출] ================= -->
+<section id="final-submit" style="background:#FFF9F8; border-top:2px solid #FED7D7;">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag" style="background:var(--coral-100); color:var(--coral);">최종 제출</span>
+      <h2>📤 7·8차시 프로젝트 활동지 저장 &amp; 패들렛 등록</h2>
+      <p>오늘 완성한 문제 정의, 해결 방안, 다른 모둠 발표 청취 메모를 <b>1장의 최종 리포트 PDF로 저장하여 패들렛에 등록</b>하세요.</p>
+    </div>
+
+    <div class="download-card">
+      <div style="margin-bottom:14px;">
+        <label style="font-size:12.5px; font-weight:700; color:var(--ink-soft); display:block; margin-bottom:4px;">우리 모둠명 / 모둠원 이름:</label>
+        <input type="text" id="in-student-info" placeholder="예: 2모둠 (김철수, 이영희, 박민수)" style="border:1.5px solid #CBD5E1; border-radius:8px; padding:9px 12px; font-size:13.5px; width:300px;">
+      </div>
+
+      <div class="step-flex-grid">
+        <div class="step-card">
+          <div>
+            <h4><span class="step-badge">STEP 1</span> 📄 최종 리포트 PDF 다운로드</h4>
+            <p>버튼을 누르고 인쇄 창에서 <b>[PDF로 저장]</b>을 선택해 보관하세요. (A4 1장 규격)</p>
+          </div>
+          <button class="btn-export" onclick="exportProjectSheet()">
+            <span>📥 활동지 PDF 저장하기</span>
+          </button>
+        </div>
+
+        <div class="step-card" style="border-color:#FED7D7; background:#FFFDFD;">
+          <div>
+            <h4><span class="step-badge" style="background:#FFE3E3; color:#C53030;">STEP 2</span> 📌 패들렛 최종 등록</h4>
+            <p>저장된 PDF를 패들렛 게시판에 <b>[파일 첨부]</b>하여 프로젝트를 완료하세요.</p>
+          </div>
+          <a href="https://padlet.com/1819hyuk/padlet-s0237vr7taoksqvu3p5o" target="_blank" rel="noopener noreferrer" class="act-link-btn padlet" style="padding:12px; justify-content:center; border-radius:10px; font-weight:800;">
+            <span>📌 패들렛에 제출하기 ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= [인쇄용 A4 1장 숨김 레이아웃] ================= -->
+<div id="printable-area">
+  <div class="print-page">
+    <div class="print-header">
+      <div>
+        <h2 style="margin:0; font-size:14px; color:#111;">[7·8차시 최종 보고서] 지역 문제 정의 및 해결 솔루션</h2>
+        <div style="font-size:10px; color:#555;">프로젝트: 우리 동네, 어떻게 바뀔까?</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px; font-weight:bold;" id="prt-student-info">작성자: 미입력</div>
+        <div style="font-size:9px; color:#666;">출력일: <span id="prt-date"></span></div>
+      </div>
+    </div>
+
+    <div class="print-title">1. 지역 문제 정의 (7차시 교재 7p)</div>
+    <div class="print-block">
+      • <b>문제 정의:</b> <span id="prt-p7-prob" style="font-weight:bold;">-</span><br>
+      • <b>영향 대상:</b> <span id="prt-p7-target">-</span> | <b>추정 원인:</b> <span id="prt-p7-reason">-</span>
+    </div>
+
+    <div class="print-title">2. 최종 해결 방안 정리 (7차시 교재 8p)</div>
+    <table class="print-table" style="margin-bottom:5px;">
+      <tr><th style="width:25%;">구분</th><th>내용</th></tr>
+      <tr><td><b>우리 지역의 문제</b></td><td id="prt-fin-prob">-</td></tr>
+      <tr><td><b>데이터 근거</b></td><td id="prt-fin-data">-</td></tr>
+      <tr><td><b>해결 아이디어</b></td><td id="prt-fin-sol" style="font-weight:bold;">-</td></tr>
+      <tr><td><b>기대 효과</b></td><td id="prt-fin-effect">-</td></tr>
+    </table>
+
+    <div class="print-title">3. 다른 모둠 발표 청취 메모 (8차시 교재 9p - 7개 모둠)</div>
+    <table class="print-table">
+      <tr><th style="width:16%;">모둠명</th><th style="width:42%;">잘한 점 1가지</th><th style="width:42%;">궁금한 점 1가지</th></tr>
+      <tr><td id="prt-team-1" style="font-weight:bold;">1모둠</td><td id="prt-g1">-</td><td id="prt-q1">-</td></tr>
+      <tr><td id="prt-team-2" style="font-weight:bold;">2모둠</td><td id="prt-g2">-</td><td id="prt-q2">-</td></tr>
+      <tr><td id="prt-team-3" style="font-weight:bold;">3모둠</td><td id="prt-g3">-</td><td id="prt-q3">-</td></tr>
+      <tr><td id="prt-team-4" style="font-weight:bold;">4모둠</td><td id="prt-g4">-</td><td id="prt-q4">-</td></tr>
+      <tr><td id="prt-team-5" style="font-weight:bold;">5모둠</td><td id="prt-g5">-</td><td id="prt-q5">-</td></tr>
+      <tr><td id="prt-team-6" style="font-weight:bold;">6모둠</td><td id="prt-g6">-</td><td id="prt-q6">-</td></tr>
+      <tr><td id="prt-team-7" style="font-weight:bold;">7모둠</td><td id="prt-g7">-</td><td id="prt-q7">-</td></tr>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>우리 동네, 어떻게 바뀔까? · 데이터로 알아보는 인구 변화 프로젝트</span>
+    <span>7·8차시 최종 통합 모듈</span>
+  </div>
+</footer>
+
+<script>
+function checkWarmQuiz(btn, msg) {
+  btn.parentElement.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const res = document.getElementById('quiz-result-msg');
+  res.style.display = 'block';
+  res.innerText = msg;
+}
+
+document.getElementById('in-p7-prob-sentence').addEventListener('input', function(e) {
+  document.getElementById('in-p8-base-prob').value = e.target.value;
+  document.getElementById('in-fin-prob').value = e.target.value;
+});
+
+function exportProjectSheet() {
+  const name = document.getElementById('in-student-info').value.trim() || "-";
+  const getVal = id => document.getElementById(id).value.trim() || "-";
+  
+  document.getElementById('prt-student-info').innerText = "작성 모둠: " + name;
+  document.getElementById('prt-date').innerText = new Date().toLocaleDateString();
+  
+  document.getElementById('prt-p7-prob').innerText = getVal('in-p7-prob-sentence');
+  document.getElementById('prt-p7-target').innerText = getVal('in-p7-target');
+  document.getElementById('prt-p7-reason').innerText = getVal('in-p7-reason');
+  
+  document.getElementById('prt-fin-prob').innerText = getVal('in-fin-prob');
+  document.getElementById('prt-fin-data').innerText = getVal('in-fin-data');
+  document.getElementById('prt-fin-sol').innerText = getVal('in-fin-sol');
+  document.getElementById('prt-fin-effect').innerText = getVal('in-fin-effect');
+  
+  // 1~7모둠 이름 및 피드백 매핑
+  for(let i=1; i<=7; i++) {
+    document.getElementById(`prt-team-${i}`).innerText = getVal(`in-team-name-${i}`);
+    document.getElementById(`prt-g${i}`).innerText = getVal(`in-p-good${i}`);
+    document.getElementById(`prt-q${i}`).innerText = getVal(`in-p-q${i}`);
+  }
+
+  window.print();
+  
+  setTimeout(() => {
+    if(confirm("활동지 PDF 저장을 완료하셨나요?\n확인을 누르면 패들렛 게시판으로 이동합니다.")) {
+      window.open("https://padlet.com/1819hyuk/padlet-s0237vr7taoksqvu3p5o", "_blank");
+    }
+  }, 1000);
+}
+</script>
+</body>
+</html>
